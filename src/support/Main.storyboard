@@ -10,7 +10,7 @@
         <!--ToDos View-->
         <scene sceneID="1Zh-zH-rHS">
             <objects>
-                <tableViewController id="JqR-Ds-qXW" userLabel="ToDos View" sceneMemberID="viewController">
+                <tableViewController id="JqR-Ds-qXW" userLabel="ToDos View" customClass="ToDosTableViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bBa-N9-gl0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,7 +45,7 @@
         <!--Add ToDo View-->
         <scene sceneID="5Ne-Xq-toZ">
             <objects>
-                <viewController id="pIl-Oa-GRj" userLabel="Add ToDo View" sceneMemberID="viewController">
+                <viewController id="pIl-Oa-GRj" userLabel="Add ToDo View" customClass="NewToDoViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="u6J-r3-WWd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
