@@ -33,7 +33,7 @@
                     <navigationItem key="navigationItem" title="ToDos" id="uIV-nA-RyM">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="XE0-Nk-k79">
                             <connections>
-                                <segue destination="pIl-Oa-GRj" kind="presentation" id="FJQ-SV-Yef"/>
+                                <segue destination="pIl-Oa-GRj" kind="presentation" modalPresentationStyle="formSheet" id="FJQ-SV-Yef"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -49,7 +49,44 @@
                     <view key="view" contentMode="scaleToFill" id="u6J-r3-WWd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JdY-nD-T4l">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="New ToDo" id="yG9-PA-Eu5">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="eDj-4A-fqa"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="dHY-6u-HEd"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qX7-Vv-1SE" userLabel="New ToDo Field">
+                                <rect key="frame" x="20" y="386.5" width="374" height="69.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQC-iq-VYH" userLabel="Title">
+                                        <rect key="frame" x="0.0" y="0.0" width="38" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Y4t-OW-B3c">
+                                        <rect key="frame" x="0.0" y="35.5" width="354" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Y4t-OW-B3c" secondAttribute="trailing" constant="20" id="M5f-cj-y79"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Ksf-Uq-fJx" firstAttribute="trailing" secondItem="qX7-Vv-1SE" secondAttribute="trailing" constant="20" id="3Gf-ub-qxN"/>
+                            <constraint firstItem="qX7-Vv-1SE" firstAttribute="centerY" secondItem="u6J-r3-WWd" secondAttribute="centerY" id="P7Z-d8-E7W"/>
+                            <constraint firstItem="qX7-Vv-1SE" firstAttribute="leading" secondItem="Ksf-Uq-fJx" secondAttribute="leading" constant="20" id="tsS-eb-Vwe"/>
+                            <constraint firstItem="qX7-Vv-1SE" firstAttribute="centerX" secondItem="u6J-r3-WWd" secondAttribute="centerX" id="vil-6Y-8gh"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Ksf-Uq-fJx"/>
                     </view>
                 </viewController>
