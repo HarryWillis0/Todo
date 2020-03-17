@@ -55,7 +55,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="New ToDo" id="yG9-PA-Eu5">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="eDj-4A-fqa"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="eDj-4A-fqa">
+                                            <connections>
+                                                <segue destination="24S-z4-bRA" kind="unwind" identifier="cancelNewToDoSegue" unwindAction="cancelWithSegue:" id="H9g-6K-iTe"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="dHY-6u-HEd"/>
                                     </navigationItem>
                                 </items>
@@ -91,8 +95,9 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xz9-2d-RBV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="24S-z4-bRA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1088" y="92"/>
+            <point key="canvasLocation" x="1568" y="101"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PXv-fY-A2k">
