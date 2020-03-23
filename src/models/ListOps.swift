@@ -14,10 +14,11 @@ class ListOps {
     //
     //  Create a new list from supplied title
     //  @param title -> title of new list
+    //  @return true if successfull, false otherwise
     //
-    static func createList(_ title: String) {
+    static func createList(_ title: String) -> Bool {
         // get container
-        guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
+        guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return false }
         
         // get context
         let context = appDel.persistentContainer.viewContext
@@ -31,9 +32,11 @@ class ListOps {
         // save to db
         do {
             try context.save()
+            return true
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
+        return false
     }
     
     //

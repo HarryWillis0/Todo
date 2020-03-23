@@ -15,7 +15,7 @@ class TodoOps {
     //
     //  Create a new Todo entity, set up relationship with supplied list
     //  @param title -> title of list to associate new todo with
-    // @param description -> contents of new todo
+    //  @param description -> contents of new todo
     //  @return true if successfull, false otherwise
     //
     static func createTodo(_ title: String, _ description: String) -> Bool{
