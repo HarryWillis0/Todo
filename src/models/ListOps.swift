@@ -16,10 +16,10 @@ class ListOps {
     //  @param title -> title of new list
     //
     static func createList(_ title: String) {
-        // get referene to app delegate instance
+        // get container
         guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
         
-        // get entity context
+        // get context
         let context = appDel.persistentContainer.viewContext
         
         // create list
@@ -46,7 +46,7 @@ class ListOps {
         // get container
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return [List]() }
         
-        // create context
+        // get context
         let managedContext = appDelegate.persistentContainer.viewContext
         
         // prepare request
@@ -75,7 +75,7 @@ class ListOps {
         // get container
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
         
-        // create context
+        // get context
         let context = appDelegate.persistentContainer.viewContext
         
         // prepare request
@@ -107,7 +107,7 @@ class ListOps {
         // get container
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return false }
         
-        // create context
+        // get context
         let context = appDelegate.persistentContainer.viewContext
         
         // setup fetch request
