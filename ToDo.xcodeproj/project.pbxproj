@@ -21,6 +21,8 @@
 		7E8341B62428342800816BAD /* Todo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8341B42428342800816BAD /* Todo+CoreDataProperties.swift */; };
 		7E8341B82428345600816BAD /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8341B72428345600816BAD /* List.swift */; };
 		7E8341BA2428346300816BAD /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8341B92428346300816BAD /* Todo.swift */; };
+		7E8341BC2428356C00816BAD /* TodoOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8341BB2428356C00816BAD /* TodoOps.swift */; };
+		7E8341BE2428367700816BAD /* ListOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8341BD2428367700816BAD /* ListOps.swift */; };
 		7ED96B1324217FD000986648 /* ToDosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED96B1224217FD000986648 /* ToDosTableViewController.swift */; };
 		7ED96B152421801F00986648 /* NewToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED96B142421801F00986648 /* NewToDoViewController.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +63,8 @@
 		7E8341B42428342800816BAD /* Todo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Todo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		7E8341B72428345600816BAD /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		7E8341B92428346300816BAD /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		7E8341BB2428356C00816BAD /* TodoOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoOps.swift; sourceTree = "<group>"; };
+		7E8341BD2428367700816BAD /* ListOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOps.swift; sourceTree = "<group>"; };
 		7ED96B1224217FD000986648 /* ToDosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosTableViewController.swift; sourceTree = "<group>"; };
 		7ED96B142421801F00986648 /* NewToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewToDoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,6 +142,8 @@
 				7E7D918424199BA9007CC550 /* ToDo.xcdatamodeld */,
 				7E8341B72428345600816BAD /* List.swift */,
 				7E8341B92428346300816BAD /* Todo.swift */,
+				7E8341BB2428356C00816BAD /* TodoOps.swift */,
+				7E8341BD2428367700816BAD /* ListOps.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -341,7 +347,9 @@
 				7E8341BA2428346300816BAD /* Todo.swift in Sources */,
 				7ED96B152421801F00986648 /* NewToDoViewController.swift in Sources */,
 				7E8341B82428345600816BAD /* List.swift in Sources */,
+				7E8341BE2428367700816BAD /* ListOps.swift in Sources */,
 				7E8341B52428342800816BAD /* List+CoreDataProperties.swift in Sources */,
+				7E8341BC2428356C00816BAD /* TodoOps.swift in Sources */,
 				7E7D919124199BAA007CC550 /* ToDo.xcdatamodeld in Sources */,
 				7E8341B62428342800816BAD /* Todo+CoreDataProperties.swift in Sources */,
 				7ED96B1324217FD000986648 /* ToDosTableViewController.swift in Sources */,
