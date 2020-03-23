@@ -1,23 +1,23 @@
 //
-//  NewToDoViewController.swift
+//  NewTodoViewController.swift
 //  ToDo
 //
-//  Created by Harry George Willis on 2020-03-17.
+//  Created by Harry George Willis on 2020-03-22.
 //  Copyright © 2020 harry. All rights reserved.
 //
 
 import UIKit
 
-class NewToDoViewController: UIViewController {
+class NewTodoViewController: UIViewController {
 
+    @IBOutlet weak var popup: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        popup.layer.cornerRadius = 8
 
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -25,6 +25,4 @@ class NewToDoViewController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
-
 }

@@ -14,11 +14,6 @@ class ToDosTableViewController: UITableViewController {
         super.viewDidLoad()
 
     }
-    
-    // handle return segues from cancel button
-    @IBAction func cancel(segue: UIStoryboardSegue){
-        // do nothing
-    }
 
     // MARK: - Table view data source
 
@@ -77,5 +72,11 @@ class ToDosTableViewController: UITableViewController {
     }
     */
 
+    // MARK: - Navigation
+    
+    // handle return segues from cancel button
+    @IBAction func cancel(segue: UIStoryboardSegue){
+        // do nothing
+    }
 
 }
