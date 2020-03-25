@@ -75,8 +75,13 @@ class ToDosTableViewController: UITableViewController {
     // MARK: - Navigation
     
     // handle return segues from cancel button
-    @IBAction func cancel(segue: UIStoryboardSegue){
+    @IBAction func cancel(segue: UIStoryboardSegue) {
         // do nothing
+    }
+    
+    // handle return segue from save button
+    @IBAction func save(segue: UIStoryboardSegue) {
+        
     }
 
 }

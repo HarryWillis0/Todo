@@ -12,6 +12,8 @@ class NewTodoViewController: UIViewController {
 
     @IBOutlet weak var popup: UIView!
     
+    @IBOutlet weak var newTitle: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         popup.layer.cornerRadius = 8
