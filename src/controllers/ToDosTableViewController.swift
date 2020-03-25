@@ -51,15 +51,30 @@ class ToDosTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        
+            // successful delete
+            if ListOps.deleteListByName(lists[indexPath.row].title) {
+                // delete from lists array
+                lists.remove(at: indexPath.row)
+                
+                // delete row from taableview
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                // reload and display lists
+                lists = ListOps.retrieveLists()!
+                tableView.reloadData()
+            } else { // unsuccessful
+                // alert unsuccessful
+                let alert = UIAlertController(title: "Delete List Error", message: "Sorry, we weren't able to delete your  list.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
