@@ -57,9 +57,7 @@ class ToDosTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        
     }
     */
 
@@ -67,14 +65,6 @@ class ToDosTableViewController: UITableViewController {
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
 
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
     }
     */
 
@@ -87,7 +77,24 @@ class ToDosTableViewController: UITableViewController {
     
     // handle return segue from save button
     @IBAction func save(segue: UIStoryboardSegue) {
-        
+        // catch new list title
+        if segue.identifier == "saveNewList" {
+            let newListVC = segue.source as! NewTodoViewController
+            
+            // save successful
+            if ListOps.createList(newListVC.newTitle) {
+                
+                // reload lists
+                lists = ListOps.retrieveLists()!
+                self.tableView.reloadData()
+            } else { // save unsuccesful
+                
+                // alert unsuccessful
+                let alert = UIAlertController(title: "New List Error", message: "Sorry, we weren't able to save your new list.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
 
 }

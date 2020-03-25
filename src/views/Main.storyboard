@@ -95,8 +95,8 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="newTitle" destination="94D-dD-jvM" id="yPY-pF-mgg"/>
                         <outlet property="popup" destination="9A5-yV-Q2i" id="UVw-3Y-Ncw"/>
+                        <outlet property="txtFieldNewTitle" destination="94D-dD-jvM" id="hZN-GP-LO7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oZR-OD-X2s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
