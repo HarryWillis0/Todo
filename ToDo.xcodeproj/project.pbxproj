@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E6626B7242BB7560007B334 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6626B6242BB7560007B334 /* TableViewController.swift */; };
 		7E7D919024199BAA007CC550 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E7D918224199BA9007CC550 /* Assets.xcassets */; };
 		7E7D919124199BAA007CC550 /* ToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7E7D918424199BA9007CC550 /* ToDo.xcdatamodeld */; };
 		7E7D919224199BAA007CC550 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7D918724199BAA007CC550 /* LaunchScreen.storyboard */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E6626B6242BB7560007B334 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		7E7D9149241999D1007CC550 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7D9162241999D3007CC550 /* ToDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7D916D241999D3007CC550 /* ToDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,6 +164,7 @@
 			children = (
 				7ED96B1224217FD000986648 /* ToDosTableViewController.swift */,
 				7E899B1F24284D1700ED805B /* NewTodoViewController.swift */,
+				7E6626B6242BB7560007B334 /* TableViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				7E8341B52428342800816BAD /* List+CoreDataProperties.swift in Sources */,
 				7E8341BC2428356C00816BAD /* TodoOps.swift in Sources */,
 				7E7D919124199BAA007CC550 /* ToDo.xcdatamodeld in Sources */,
+				7E6626B7242BB7560007B334 /* TableViewController.swift in Sources */,
 				7E8341B62428342800816BAD /* Todo+CoreDataProperties.swift in Sources */,
 				7ED96B1324217FD000986648 /* ToDosTableViewController.swift in Sources */,
 				7E7D91A624199C76007CC550 /* AppDelegate.swift in Sources */,
