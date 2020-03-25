@@ -29,6 +29,10 @@ class ListDetailsTableViewController: UITableViewController {
         navBar.title = currList.title
         // edit button on nav bar
         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        for todo in todos {
+            print("todo: \(todo.desc) \(todo.orderIndex)")
+        }
     }
 
     // MARK: - Table view data source
@@ -51,16 +55,6 @@ class ListDetailsTableViewController: UITableViewController {
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -71,9 +65,6 @@ class ListDetailsTableViewController: UITableViewController {
                 
                 // delete row from taableview
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                
-                // save order
-                saveOrder()
                 
                 // reload and display lists
                 loadTodos()
@@ -86,31 +77,27 @@ class ListDetailsTableViewController: UITableViewController {
         }
     }
     
-
-    /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+        // get todo moved
+        let moved = self.todos[fromIndexPath.row]
+        
+        // remove it
+        todos.remove(at: fromIndexPath.row)
+        
+        // insert at new position
+        todos.insert(moved, at: to.row)
+        
+        let olds = saveOrder()
+        
+        // update each todo (save their order)
+        for (index, todo) in self.todos.enumerated() {
+            TodoOps.updateTodo(olds[index], todo)
+        }
     }
-    */
 
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     // handle return segues from cancel button
     @IBAction func cancel(segue: UIStoryboardSegue) {
@@ -124,8 +111,6 @@ class ListDetailsTableViewController: UITableViewController {
             let newToDoVC = segue.source as! NewToDoViewController
             // new todo added successfully
             if (TodoOps.createTodo(currList.title, newToDoVC.newTodo)) {
-                // save order
-                saveOrder()
                 // reload items and display
                 loadTodos()
             } else { // added unsuccessfully
@@ -150,9 +135,12 @@ class ListDetailsTableViewController: UITableViewController {
     }
     
     // save current order of list's todos
-    func saveOrder() {
+    func saveOrder() -> [Todo] {
+        var oldTodos = [Todo]()
         for (index, todo) in self.todos.enumerated() {
+            oldTodos.append(todo)
             todo.orderIndex = Int32(index)
         }
+        return oldTodos
     }
 }

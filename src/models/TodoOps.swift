@@ -47,9 +47,46 @@ class TodoOps {
     }
     
     //
+    //  Update a todo
+    //  @param old -> old object used to find
+    //  @param updated -> updated todo object
+    //
+    static func updateTodo(_ old: Todo, _ updated: Todo) {
+        // get container
+        guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        // get context
+        let context = appDel.persistentContainer.viewContext
+        
+        // fetch todo from db
+        let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "Todo")
+        fetchReq.predicate = NSPredicate(format: "desc = %@", old.desc)
+        
+        // extract todo from result
+        do {
+            let result = try context.fetch(fetchReq)
+            
+            if !result.isEmpty {
+                let todo = result[0] as! Todo
+                todo.desc = updated.desc
+                todo.orderIndex = updated.orderIndex
+                
+                do {
+                    try context.save()
+                } catch let error as NSError {
+                    print("Unable to update todo. \(error), \(error.userInfo)")
+                }
+            }
+        } catch let error as NSError{
+            print("Unable to find todo. \(error), \(error.userInfo)")
+        }
+        
+    }
+    
+    //
     //  Delete a single todo by its description
     //  @param desc -> contents of the todo to delete
-    //  @return true if successfull, false otherwise
+    //  @return true if successful, false otherwise
     //
     static func deleteItemByDesc(_ desc: String) -> Bool {
         // get container
