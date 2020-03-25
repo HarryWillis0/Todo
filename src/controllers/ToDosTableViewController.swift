@@ -85,6 +85,18 @@ class ToDosTableViewController: UITableViewController {
 
     // MARK: - Navigation
     
+    // send current list to detali view
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showListDetails") {
+            // get row
+            let index = self.tableView.indexPathForSelectedRow?.row ?? 0
+            
+            let vc = segue.destination as! ListDetailsTableViewController
+            vc.currList = lists[index]
+        }
+    }
+
+    
     // handle return segues from cancel button
     @IBAction func cancel(segue: UIStoryboardSegue) {
         // do nothing
@@ -94,7 +106,7 @@ class ToDosTableViewController: UITableViewController {
     @IBAction func save(segue: UIStoryboardSegue) {
         // catch new list title
         if segue.identifier == "saveNewList" {
-            let newListVC = segue.source as! NewTodoViewController
+            let newListVC = segue.source as! NewListViewController
             
             // save successful
             if ListOps.createList(newListVC.newTitle) {

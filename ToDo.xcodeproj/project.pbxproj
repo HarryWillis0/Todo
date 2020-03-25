@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7E6626B9242BC7110007B334 /* ListDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6626B8242BC7110007B334 /* ListDetailsTableViewController.swift */; };
+		7E6626BB242BCD2C0007B334 /* NewToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6626BA242BCD2C0007B334 /* NewToDoViewController.swift */; };
 		7E7D919024199BAA007CC550 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E7D918224199BA9007CC550 /* Assets.xcassets */; };
 		7E7D919124199BAA007CC550 /* ToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7E7D918424199BA9007CC550 /* ToDo.xcdatamodeld */; };
 		7E7D919224199BAA007CC550 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7D918724199BAA007CC550 /* LaunchScreen.storyboard */; };
@@ -24,7 +25,7 @@
 		7E8341BA2428346300816BAD /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8341B92428346300816BAD /* Todo.swift */; };
 		7E8341BC2428356C00816BAD /* TodoOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8341BB2428356C00816BAD /* TodoOps.swift */; };
 		7E8341BE2428367700816BAD /* ListOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8341BD2428367700816BAD /* ListOps.swift */; };
-		7E899B2024284D1700ED805B /* NewTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E899B1F24284D1700ED805B /* NewTodoViewController.swift */; };
+		7E899B2024284D1700ED805B /* NewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E899B1F24284D1700ED805B /* NewListViewController.swift */; };
 		7ED96B1324217FD000986648 /* ToDosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED96B1224217FD000986648 /* ToDosTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		7E6626B8242BC7110007B334 /* ListDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailsTableViewController.swift; sourceTree = "<group>"; };
+		7E6626BA242BCD2C0007B334 /* NewToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewToDoViewController.swift; sourceTree = "<group>"; };
 		7E7D9149241999D1007CC550 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7D9162241999D3007CC550 /* ToDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7D916D241999D3007CC550 /* ToDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,7 +69,7 @@
 		7E8341B92428346300816BAD /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		7E8341BB2428356C00816BAD /* TodoOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoOps.swift; sourceTree = "<group>"; };
 		7E8341BD2428367700816BAD /* ListOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOps.swift; sourceTree = "<group>"; };
-		7E899B1F24284D1700ED805B /* NewTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTodoViewController.swift; sourceTree = "<group>"; };
+		7E899B1F24284D1700ED805B /* NewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListViewController.swift; sourceTree = "<group>"; };
 		7ED96B1224217FD000986648 /* ToDosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDosTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,8 +165,9 @@
 			isa = PBXGroup;
 			children = (
 				7ED96B1224217FD000986648 /* ToDosTableViewController.swift */,
-				7E899B1F24284D1700ED805B /* NewTodoViewController.swift */,
+				7E899B1F24284D1700ED805B /* NewListViewController.swift */,
 				7E6626B8242BC7110007B334 /* ListDetailsTableViewController.swift */,
+				7E6626BA242BCD2C0007B334 /* NewToDoViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -350,11 +353,12 @@
 				7E6626B9242BC7110007B334 /* ListDetailsTableViewController.swift in Sources */,
 				7E8341BA2428346300816BAD /* Todo.swift in Sources */,
 				7E8341B82428345600816BAD /* List.swift in Sources */,
-				7E899B2024284D1700ED805B /* NewTodoViewController.swift in Sources */,
+				7E899B2024284D1700ED805B /* NewListViewController.swift in Sources */,
 				7E8341BE2428367700816BAD /* ListOps.swift in Sources */,
 				7E8341B52428342800816BAD /* List+CoreDataProperties.swift in Sources */,
 				7E8341BC2428356C00816BAD /* TodoOps.swift in Sources */,
 				7E7D919124199BAA007CC550 /* ToDo.xcdatamodeld in Sources */,
+				7E6626BB242BCD2C0007B334 /* NewToDoViewController.swift in Sources */,
 				7E8341B62428342800816BAD /* Todo+CoreDataProperties.swift in Sources */,
 				7ED96B1324217FD000986648 /* ToDosTableViewController.swift in Sources */,
 				7E7D91A624199C76007CC550 /* AppDelegate.swift in Sources */,
