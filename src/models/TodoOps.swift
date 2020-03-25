@@ -59,7 +59,7 @@ class TodoOps {
         let context = appDel.persistentContainer.viewContext
         
         // setup fetch request
-        let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "Item")
+        let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "Todo")
         fetchReq.predicate = NSPredicate(format: "desc = %@", desc)
         
         // execute fetch

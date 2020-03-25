@@ -60,17 +60,32 @@ class ListDetailsTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            // successful delete
+            if TodoOps.deleteItemByDesc(todos[indexPath.row].desc) {
+                // delete from lists array
+                todos.remove(at: indexPath.row)
+                
+                // delete row from taableview
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                // save order
+                saveOrder()
+                
+                // reload and display lists
+                loadTodos()
+            } else { // unsuccessful
+                // alert unsuccessful
+                let alert = UIAlertController(title: "Delete Todo Error", message: "Sorry, we weren't able to delete your  todo.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -112,7 +127,7 @@ class ListDetailsTableViewController: UITableViewController {
                 // save order
                 saveOrder()
                 // reload items and display
-                loadItems()
+                loadTodos()
             } else { // added unsuccessfully
                 // alert unsuccessful
                 let alert = UIAlertController(title: "New ToDo Error", message: "Sorry, we weren't able to save your new todo.", preferredStyle: .alert)
@@ -125,7 +140,7 @@ class ListDetailsTableViewController: UITableViewController {
     // MARK: - helpers
     
     // regather current list's todos and display
-    func loadItems() {
+    func loadTodos() {
         // get items for that list and order on their order property
         let set: NSSet? = currList.todos
         todos = set?.allObjects as! [Todo]
