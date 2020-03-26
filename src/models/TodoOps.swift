@@ -32,6 +32,7 @@ class TodoOps {
         let newTodo = Todo(context: context)
         newTodo.desc = description
         newTodo.list = list
+        newTodo.done = false
         
         // add todo to list
         list.addToTodos(newTodo)
@@ -70,6 +71,7 @@ class TodoOps {
                 let todo = result[0] as! Todo
                 todo.desc = updated.desc
                 todo.orderIndex = updated.orderIndex
+                todo.done = updated.done
                 
                 do {
                     try context.save()

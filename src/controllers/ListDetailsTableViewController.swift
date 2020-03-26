@@ -9,7 +9,7 @@
 import UIKit
 
 class ListDetailsTableViewController: UITableViewController {
-
+    
     @IBOutlet weak var navBar: UINavigationItem!
     
     var currList: List = List()
@@ -29,10 +29,6 @@ class ListDetailsTableViewController: UITableViewController {
         navBar.title = currList.title
         // edit button on nav bar
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        for todo in todos {
-            print("todo: \(todo.desc) \(todo.orderIndex)")
-        }
     }
 
     // MARK: - Table view data source
@@ -48,9 +44,17 @@ class ListDetailsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath)
-
-        // Configure the cell...
-        cell.textLabel?.text = todos[indexPath.row].desc
+        
+        // is todo already done? strikethrough if so
+        if todos[indexPath.row].done {
+            // build striked string
+            let striked: NSAttributedString = buildStriked(todos[indexPath.row].desc)
+            cell.textLabel?.attributedText = striked
+        } else {
+            // build unstriked
+            let unstriked: NSAttributedString = buildUnstriked(todos[indexPath.row].desc)
+            cell.textLabel?.attributedText = unstriked
+        }
 
         return cell
     }
@@ -94,6 +98,44 @@ class ListDetailsTableViewController: UITableViewController {
         for (index, todo) in self.todos.enumerated() {
             TodoOps.updateTodo(olds[index], todo)
         }
+    }
+    
+    // swiping right on cell to strikethrough todo
+    // update todos done property so we can save the strike through for next app load
+    override func tableView(_ tableView: UITableView,
+                   leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let swipeAct: UIContextualAction = UIContextualAction(style: .normal, title: "Done!", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            // build striked string and set cell text to it
+            let striked: NSAttributedString =  self.buildStriked(tableView.cellForRow(at: indexPath)!.textLabel!.text!)
+            tableView.cellForRow(at: indexPath)!.textLabel?.attributedText = striked
+            // update todo
+            self.updateDone(true, self.todos[indexPath.row])
+            success(true)
+        })
+        
+        swipeAct.backgroundColor = .green
+        return UISwipeActionsConfiguration(actions: [swipeAct])
+    }
+    
+    // swiping left on cell to undo strike through
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let swipeAct: UIContextualAction = UIContextualAction(style: .normal, title: "Not done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            // go build unstriked version of todo desc
+            let unstriked: NSAttributedString = self.buildUnstriked(self.todos[indexPath.row].desc)
+            
+            // set attributedText to unstriked todo desc
+            tableView.cellForRow(at: indexPath)!.textLabel!.attributedText = unstriked
+            
+            // update todo
+            self.updateDone(false, self.todos[indexPath.row])
+            success(true)
+        })
+        
+        swipeAct.backgroundColor = .blue
+        return UISwipeActionsConfiguration(actions: [swipeAct])
     }
 
     
@@ -142,5 +184,40 @@ class ListDetailsTableViewController: UITableViewController {
             todo.orderIndex = Int32(index)
         }
         return oldTodos
+    }
+    
+    // update the done state of a todo object to value
+    func updateDone(_ value: Bool, _ todo: Todo) {
+        let index = self.tableView.indexPathForSelectedRow?.row ?? 0
+        //save old one
+        let old: Todo = self.todos[index]
+        self.todos[index].done = value
+        TodoOps.updateTodo(old, self.todos[index])
+    }
+    
+    // build striked through string from current todo description
+    func buildStriked(_ desc: String) -> NSAttributedString {
+        // set up some attributes
+        let attributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue,
+            NSAttributedString.Key.strikethroughColor: UIColor.red,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17.0)
+        ]
+        // build string with above attributes
+        let striked : NSMutableAttributedString =  NSMutableAttributedString(string: desc, attributes: attributes)
+        
+        return striked
+    }
+    
+    // build unstriked string for resetting todo to undone
+    func buildUnstriked(_ desc: String) -> NSAttributedString {
+        // set up some attributes
+        let attributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17.0)
+        ]
+        
+        let unstriked: NSMutableAttributedString = NSMutableAttributedString(string: desc, attributes: attributes)
+        
+        return unstriked
     }
 }
