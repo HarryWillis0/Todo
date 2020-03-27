@@ -8,7 +8,8 @@ Below are some things involved with this app if you're looking for something spe
 * table view operations (this is in src/controllers)
     * slide left / right event handlers
     * re-ordering and saving new order
-    *  selecting cells and then passing data through segues
+    * selecting cells and then passing data through segues
+    * simple animation
 
 # Tools
 * Xcode

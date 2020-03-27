@@ -59,6 +59,20 @@ class ListDetailsTableViewController: UITableViewController {
         return cell
     }
     
+    // animate cell load
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // simple fade animation
+        cell.alpha = 0
+
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.05 * Double(indexPath.row),
+            animations: {
+                cell.alpha = 1
+        })
+        
+    }
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -106,10 +120,22 @@ class ListDetailsTableViewController: UITableViewController {
                    leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         let swipeAct: UIContextualAction = UIContextualAction(style: .normal, title: "Done!", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            // if already done do nothing
+            if self.todos[indexPath.row].done {
+                success(true)
+                return
+            }
             
             // build striked string and set cell text to it
             let striked: NSAttributedString =  self.buildStriked(tableView.cellForRow(at: indexPath)!.textLabel!.text!)
+            
+            // build transition
+            let transition = self.buildStrikeTransition()
+            
+            // set cell text with transition
             tableView.cellForRow(at: indexPath)!.textLabel?.attributedText = striked
+            tableView.cellForRow(at: indexPath)!.textLabel?.layer.add(transition, forKey: kCATransition)
+            
             // update todo
             self.updateDone(true, self.todos[indexPath.row])
             success(true)
@@ -122,12 +148,21 @@ class ListDetailsTableViewController: UITableViewController {
     // swiping left on cell to undo strike through
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let swipeAct: UIContextualAction = UIContextualAction(style: .normal, title: "Not done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            // if already not done do nothing
+            if !self.todos[indexPath.row].done {
+                success(true)
+                return
+            }
             
             // go build unstriked version of todo desc
             let unstriked: NSAttributedString = self.buildUnstriked(self.todos[indexPath.row].desc)
             
-            // set attributedText to unstriked todo desc
+            // build transition
+            let transition = self.buildUnstrikeTransition()
+            
+            // set cell text with transition
             tableView.cellForRow(at: indexPath)!.textLabel!.attributedText = unstriked
+            tableView.cellForRow(at: indexPath)!.textLabel?.layer.add(transition, forKey: kCATransition)
             
             // update todo
             self.updateDone(false, self.todos[indexPath.row])
@@ -219,5 +254,25 @@ class ListDetailsTableViewController: UITableViewController {
         let unstriked: NSMutableAttributedString = NSMutableAttributedString(string: desc, attributes: attributes)
         
         return unstriked
+    }
+    
+    // build strike through transition
+    func buildStrikeTransition() -> CATransition {
+        let transition: CATransition = CATransition()
+        
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        transition.duration = 0.5
+        
+        return transition
+    }
+    
+    // build unstrike transition
+    func buildUnstrikeTransition() -> CATransition {
+        let transition: CATransition = CATransition()
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        transition.duration = 0.5
+        return transition
     }
 }
