@@ -41,10 +41,13 @@ class ListDetailsTableViewController: UITableViewController {
         return todos.count
     }
 
+    // don't allow highlighting
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath)
-        
         // is todo already done? strikethrough if so
         if todos[indexPath.row].done {
             // build striked string
