@@ -121,10 +121,10 @@ class ListDetailsTableViewController: UITableViewController {
     {
         let swipeAct: UIContextualAction = UIContextualAction(style: .normal, title: "Done!", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             // if already done do nothing
-            if self.todos[indexPath.row].done {
+            /*if self.todos[indexPath.row].done {
                 success(true)
                 return
-            }
+            }*/
             
             // build striked string and set cell text to it
             let striked: NSAttributedString =  self.buildStriked(tableView.cellForRow(at: indexPath)!.textLabel!.text!)
