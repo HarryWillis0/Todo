@@ -16,9 +16,10 @@ class TodoOps {
     //  Create a new Todo entity, set up relationship with supplied list
     //  @param title -> title of list to associate new todo with
     //  @param description -> contents of new todo
+    //  @param order -> order of todo 
     //  @return true if successfull, false otherwise
     //
-    static func createTodo(_ title: String, _ description: String) -> Bool{
+    static func createTodo(_ title: String, _ description: String, _ order: Int32) -> Bool{
         // get container
         guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return false }
         
@@ -31,8 +32,10 @@ class TodoOps {
         // create todo
         let newTodo = Todo(context: context)
         newTodo.desc = description
+        newTodo.dateCreated = NSDate.init()
         newTodo.list = list
         newTodo.done = false
+        newTodo.orderIndex = order
         
         // add todo to list
         list.addToTodos(newTodo)
@@ -59,9 +62,13 @@ class TodoOps {
         // get context
         let context = appDel.persistentContainer.viewContext
         
-        // fetch todo from db
+        // fetch todo from db according to its date created and its description
+        // this lets us have multiple todos of the same description
         let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "Todo")
-        fetchReq.predicate = NSPredicate(format: "desc = %@", old.desc)
+        let descPredicate = NSPredicate(format: "desc = %@", old.desc)
+        let datePredicate = NSPredicate(format: "dateCreated = %@", old.dateCreated)
+        let andPredicate = NSCompoundPredicate.init(type: NSCompoundPredicate.LogicalType.and, subpredicates: [descPredicate, datePredicate])
+        fetchReq.predicate = andPredicate
         
         // extract todo from result
         do {
@@ -72,7 +79,6 @@ class TodoOps {
                 todo.desc = updated.desc
                 todo.orderIndex = updated.orderIndex
                 todo.done = updated.done
-                
                 do {
                     try context.save()
                 } catch let error as NSError {

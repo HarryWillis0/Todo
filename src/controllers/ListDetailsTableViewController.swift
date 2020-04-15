@@ -24,7 +24,6 @@ class ListDetailsTableViewController: UITableViewController {
         let set: NSSet? = currList.todos
         todos = set?.allObjects as! [Todo]
         self.todos.sort { $0.orderIndex < $1.orderIndex}
-        
         // set title
         navBar.title = currList.title
         // edit button on nav bar
@@ -58,7 +57,6 @@ class ListDetailsTableViewController: UITableViewController {
             let unstriked: NSAttributedString = buildUnstriked(todos[indexPath.row].desc)
             cell.textLabel?.attributedText = unstriked
         }
-
         return cell
     }
     
@@ -140,7 +138,7 @@ class ListDetailsTableViewController: UITableViewController {
             tableView.cellForRow(at: indexPath)!.textLabel?.layer.add(transition, forKey: kCATransition)
             
             // update todo
-            self.updateDone(true, self.todos[indexPath.row])
+            self.updateDone(true, self.todos[indexPath.row], indexPath.row)
             success(true)
         })
         
@@ -168,7 +166,7 @@ class ListDetailsTableViewController: UITableViewController {
             tableView.cellForRow(at: indexPath)!.textLabel?.layer.add(transition, forKey: kCATransition)
             
             // update todo
-            self.updateDone(false, self.todos[indexPath.row])
+            self.updateDone(false, self.todos[indexPath.row], indexPath.row)
             success(true)
         })
         
@@ -190,7 +188,7 @@ class ListDetailsTableViewController: UITableViewController {
         if segue.identifier == "saveNewToDo" {
             let newToDoVC = segue.source as! NewToDoViewController
             // new todo added successfully
-            if (TodoOps.createTodo(currList.title, newToDoVC.newTodo)) {
+            if (TodoOps.createTodo(currList.title, newToDoVC.newTodo, Int32(todos.count))) {
                 // reload items and display
                 loadTodos()
             } else { // added unsuccessfully
@@ -225,8 +223,7 @@ class ListDetailsTableViewController: UITableViewController {
     }
     
     // update the done state of a todo object to value
-    func updateDone(_ value: Bool, _ todo: Todo) {
-        let index = self.tableView.indexPathForSelectedRow?.row ?? 0
+    func updateDone(_ value: Bool, _ todo: Todo, _ index: Int) {
         //save old one
         let old: Todo = self.todos[index]
         self.todos[index].done = value

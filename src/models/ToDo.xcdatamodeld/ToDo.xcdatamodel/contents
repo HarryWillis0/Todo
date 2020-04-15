@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="List" representedClassName=".List" syncable="YES">
         <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="todos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Todo" inverseName="list" inverseEntity="Todo"/>
     </entity>
     <entity name="Todo" representedClassName=".Todo" syncable="YES">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="desc" attributeType="String"/>
         <attribute name="done" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="orderIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -13,6 +14,6 @@
     </entity>
     <elements>
         <element name="List" positionX="-63" positionY="-18" width="128" height="88"/>
-        <element name="Todo" positionX="-54" positionY="-9" width="128" height="103"/>
+        <element name="Todo" positionX="-54" positionY="-9" width="128" height="118"/>
     </elements>
 </model>
