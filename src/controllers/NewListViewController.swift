@@ -19,7 +19,30 @@ class NewListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         popup.layer.cornerRadius = 8
-
+        
+        // listen on when keyboard will appear
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        // listen on when keyboard will dissappear
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // slide view up when keyboard appears
+    @objc func keyboardWillShow(notification: NSNotification) {
+        // get keyboard height
+        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        let offset = keyboardFrame.cgRectValue.height
+        
+        // move view up
+        popup.frame.origin.y = offset - 50
+    }
+    
+    // slide view back to center when keyboard hides
+    @objc func keyboardWillHide(notification: NSNotification) {
+        // move view back
+        popup.frame.origin.y = 0
     }
     
     // MARK: - Navigation
