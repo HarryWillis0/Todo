@@ -15,3 +15,6 @@ Below are some things involved with this app if you're looking for something spe
 * Xcode
 * CoreData
 * Swift 5 
+
+# Preview
+![](src/resources/todo_preview.gif)
