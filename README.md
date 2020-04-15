@@ -17,4 +17,4 @@ Below are some things involved with this app if you're looking for something spe
 * Swift 5 
 
 # Preview
-![](src/resources/todo_preview.gif)
+![](src/resources/todo_preview.mov)
