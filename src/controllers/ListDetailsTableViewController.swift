@@ -64,7 +64,7 @@ class ListDetailsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // successful delete
-            if TodoOps.deleteItemByDesc(todos[indexPath.row].desc) {
+            if TodoOps.deleteItemByDesc(todos[indexPath.row].desc, todos[indexPath.row].dateCreated) {
                 // delete from lists array
                 todos.remove(at: indexPath.row)
                 
@@ -106,61 +106,21 @@ class ListDetailsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                    leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
-        let swipeAct: UIContextualAction = UIContextualAction(style: .normal, title: "Done!", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            // if already done do nothing
-            /*if self.todos[indexPath.row].done {
-                success(true)
-                return
-            }*/
-            
-            // build striked string and set cell text to it
-            let striked: NSAttributedString =  self.buildStriked(tableView.cellForRow(at: indexPath)!.textLabel!.text!)
-            
-            // build transition
-            let transition = self.buildStrikeTransition()
-            
-            // set cell text with transition
-            tableView.cellForRow(at: indexPath)!.textLabel?.attributedText = striked
-            tableView.cellForRow(at: indexPath)!.textLabel?.layer.add(transition, forKey: kCATransition)
-            
-            // update todo
-            self.updateDone(true, self.todos[indexPath.row], indexPath.row)
-            success(true)
-        })
+        var swipeAct: UIContextualAction = UIContextualAction()
+        // if not done, strike through should occur
+        if !self.todos[indexPath.row].done {
+            swipeAct = buildStrikeAction(indexPath)
         
-        swipeAct.backgroundColor = .green
-        return UISwipeActionsConfiguration(actions: [swipeAct])
-    }
-    
-    // swiping left on cell to undo strike through
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let swipeAct: UIContextualAction = UIContextualAction(style: .normal, title: "Not done", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            // if already not done do nothing
-            if !self.todos[indexPath.row].done {
-                success(true)
-                return
-            }
+        // todo is done, unstrike
+        } else {
+            swipeAct = buildUnstrikeAction(indexPath)
             
-            // go build unstriked version of todo desc
-            let unstriked: NSAttributedString = self.buildUnstriked(self.todos[indexPath.row].desc)
-            
-            // build transition
-            let transition = self.buildUnstrikeTransition()
-            
-            // set cell text with transition
-            tableView.cellForRow(at: indexPath)!.textLabel!.attributedText = unstriked
-            tableView.cellForRow(at: indexPath)!.textLabel?.layer.add(transition, forKey: kCATransition)
-            
-            // update todo
-            self.updateDone(false, self.todos[indexPath.row], indexPath.row)
-            success(true)
-        })
+        }
         
         swipeAct.backgroundColor = .blue
         return UISwipeActionsConfiguration(actions: [swipeAct])
     }
 
-    
     // MARK: - Navigation
     
     // handle return segues from cancel button
@@ -260,5 +220,48 @@ class ListDetailsTableViewController: UITableViewController {
         transition.subtype = CATransitionSubtype.fromRight
         transition.duration = 0.5
         return transition
+    }
+    
+    // create strike action
+    func buildStrikeAction(_ indexPath: IndexPath) -> UIContextualAction {
+        let temp = UIContextualAction(style: .normal, title: "Strike", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            // build striked string and set cell text to it
+            let striked: NSAttributedString =  self.buildStriked(self.tableView.cellForRow(at: indexPath)!.textLabel!.text!)
+            
+            // build transition
+            let transition = self.buildStrikeTransition()
+            
+            // set cell text with transition
+            self.tableView.cellForRow(at: indexPath)!.textLabel?.attributedText = striked
+            self.tableView.cellForRow(at: indexPath)!.textLabel?.layer.add(transition, forKey: kCATransition)
+            
+            // update todo
+            self.updateDone(true, self.todos[indexPath.row], indexPath.row)
+            success(true)
+        })
+        return temp
+    }
+    
+    // build unstrike action
+    func buildUnstrikeAction(_ indexPath: IndexPath) -> UIContextualAction {
+        let temp = UIContextualAction(style: .normal, title: "Unstrike", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            // go build unstriked version of todo desc
+            let unstriked: NSAttributedString = self.buildUnstriked(self.todos[indexPath.row].desc)
+            
+            // build transition
+            let transition = self.buildUnstrikeTransition()
+            
+            // set cell text with transition
+            self.tableView.cellForRow(at: indexPath)!.textLabel!.attributedText = unstriked
+            self.tableView.cellForRow(at: indexPath)!.textLabel?.layer.add(transition, forKey: kCATransition)
+            
+            // update todo
+            self.updateDone(false, self.todos[indexPath.row], indexPath.row)
+            success(true)
+        })
+        
+        return temp
     }
 }

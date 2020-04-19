@@ -92,20 +92,25 @@ class TodoOps {
     }
     
     //
-    //  Delete a single todo by its description
+    //  Delete a single todo by its description and date created
     //  @param desc -> contents of the todo to delete
+    //  @param dateCreated -> date created of todo to delete
     //  @return true if successful, false otherwise
     //
-    static func deleteItemByDesc(_ desc: String) -> Bool {
+    static func deleteItemByDesc(_ desc: String, _ dateCreated: NSDate) -> Bool {
         // get container
         guard let appDel = UIApplication.shared.delegate as? AppDelegate else { return false }
         
         // get context
         let context = appDel.persistentContainer.viewContext
         
-        // setup fetch request
+        // fetch todo from db according to its date created and its description
+        // this lets us have multiple todos of the same description
         let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "Todo")
-        fetchReq.predicate = NSPredicate(format: "desc = %@", desc)
+        let descPredicate = NSPredicate(format: "desc = %@", desc)
+        let datePredicate = NSPredicate(format: "dateCreated = %@", dateCreated)
+        let andPredicate = NSCompoundPredicate.init(type: NSCompoundPredicate.LogicalType.and, subpredicates: [descPredicate, datePredicate])
+        fetchReq.predicate = andPredicate
         
         // execute fetch
         do {
